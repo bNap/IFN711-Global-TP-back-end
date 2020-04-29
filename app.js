@@ -9,8 +9,10 @@ const RedisStore = require('connect-redis')(session)
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
-const blogRouter = require('./routes/blog')
+// const blogRouter = require('./routes/blog')
 const userRouter = require('./routes/user')
+const originBookRouter = require('./routes/originalBooks')
+const transBookRouter = require('./routes/translatedBooks')
 
 var app = express();
 
@@ -56,8 +58,10 @@ app.use(session({
 
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
-app.use('/api/blog', blogRouter);
+// app.use('/api/blog', blogRouter);
 app.use('/api/user', userRouter);
+app.use('/api/origin', originBookRouter);
+app.use('/api/trans', transBookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

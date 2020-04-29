@@ -9,7 +9,7 @@ const login = (username, password) => {
     password = escape(password)
 
     const sql = `
-        select username, rolename from users where username=${username} and password=${password}
+        select username, rolename, id from users where username=${username} and password=${password}
     `
     // console.log('sql is', sql)
     return exec(sql).then(rows => {

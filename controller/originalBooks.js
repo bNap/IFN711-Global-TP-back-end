@@ -53,7 +53,7 @@ const insertBook = (bookData = {}) => {
 }
 
 const updateBlog = (id, trans_num, blogData = {}) => {
-    const trans_num = escape(trans_num)
+    trans_num = escape(trans_num)
     const download_loc = escape(bookData.download_loc)
     const status = escape(bookData.status)
     const status_info = escape(bookData.status_info)
