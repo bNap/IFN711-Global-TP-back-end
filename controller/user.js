@@ -18,18 +18,33 @@ const login = (username, password) => {
 }
 
 const insertUser = (userData = {}) => {
-    const nickname = escape(userData.nickname)
-    const password = genPassword(userData.password)
-    password = escape(userData.password)
-    const address = escape(userData.address)
-    const email = escape(userData.email)
-    const phone = escape(userData.phone)
-    const firstname = escape(userData.firstname)
-    const lastname = escape(userData.lastname)
+    // const username = escape(userData.username)
+    // const role = escape(userData.role)
+    // const nickname = escape(userData.nickname)
+    // let password = escape(userData.password)
+    // password = genPassword(password)
+    // const address = escape(userData.address)
+    // const email = escape(userData.email)
+    // const phone = escape(userData.phone)
+    // const firstname = escape(userData.firstname)
+    // const lastname = escape(userData.lastname)
+
+    const username = userData.username
+    const role = userData.role
+    const rolename = userData.rolename
+    const nickname = userData.nickname
+    let password = (userData.password)
+    password = genPassword(password)
+    const address = (userData.address)
+    const email = (userData.email)
+    const phone = (userData.phone)
+    const firstname = (userData.firstname)
+    const lastname = (userData.lastname)
+
 
     const sql = `
-        insert into users (nickname, password, address, email, phone, firstname, lastname)
-        values ('${nickname}', '${password}', '${address}', '${email}', '${phone}', '${firstname}', '${lastname}');
+        insert into users (username, role, rolename, nickname, password, address, email, phone, firstname, lastname)
+        values ('${username}', '${role}', '${rolename}', '${nickname}', '${password}', '${address}', '${email}', '${phone}', '${firstname}', '${lastname}');
     `
 
     return exec(sql).then(insertData => {
@@ -51,58 +66,74 @@ const getUserInfo = (username) => {
     })
 }
 
-const updateUserInfo = (username, userData = {}) => {
-    const nickname = escape(userData.nickname)
-    const password = escape(userData.password)
-    const address = escape(userData.address)
-    const email = escape(userData.email)
-    const phone = escape(userData.phone)
-    const firstname = escape(userData.firstname)
-    const lastname = escape(userData.lastname)
-    const experience = escape(userData.experience)
+// const updateUserInfo = (username, userData = {}) => {
+const updateUserInfo = (userData = {}) => {
+    // const nickname = escape(userData.nickname)
+    // const password = escape(userData.password)
+    // const address = escape(userData.address)
+    // const email = escape(userData.email)
+    // const phone = escape(userData.phone)
+    // const firstname = escape(userData.firstname)
+    // const lastname = escape(userData.lastname)
+    // const experience = escape(userData.experience)
+    const username = (userData.username)
+    console.log("********************d**********")
+    console.log(userData)
+    console.log("********************d**********")
+    const nickname = (userData.nickname)
+    const password = (userData.password)
+    const address = (userData.address)
+    const email = (userData.email)
+    const phone = (userData.phone)
+    const firstname = (userData.firstname)
+    const lastname = (userData.lastname)
+    const experience = (userData.experience)
     let count = 0
-    const sql = `
-        update users set `
-        if (nickname) {
-            sql += `nickname='${nickname}'`
-            count += 1
-        }
-        if (password) {
-            if (count > 0) { sql += `, ` }
-            sql += `password='${password}'`
-            count += 1
-        }
-        if (address) {
-            if (count > 0) { sql += `, ` }
-            sql += `address='${address}'`
-            count += 1
-        }
-        if (email) {
-            if (count > 0) { sql += `, ` }
-            sql += `email='${email}'`
-            count += 1
-        }
-        if (phone) {
-            if (count > 0) { sql += `, ` }
-            sql += `phone='${phone}'`
-            count += 1
-        }
-        if (firstname) {
-            if (count > 0) { sql += `, ` }
-            sql += `firstname='${firstname}'`
-            count += 1
-        }
-        if (lastname) {
-            if (count > 0) { sql += `, ` }
-            sql += `lastname='${lastname}'`
-            count += 1
-        }
-        if (experience) {
-            if (count > 0) { sql += `, ` }
-            sql += `experience='${experience}'`
-            count += 1
-        }
-        sql += `where username=${username};`
+    let sql = ` update users set `;
+    if (nickname) {
+        sql += `nickname='${nickname}'`
+        count += 1
+    }
+    if (password) {
+        if (count > 0) { sql += `, ` }
+        sql += `password='${password}'`
+        count += 1
+    }
+    if (address) {
+        if (count > 0) { sql += `, ` }
+        sql += `address='${address}'`
+        count += 1
+    }
+    if (email) {
+        if (count > 0) { sql += `, ` }
+        sql += `email='${email}'`
+        count += 1
+    }
+    if (phone) {
+        if (count > 0) { sql += `, ` }
+        sql += `phone='${phone}'`
+        count += 1
+    }
+    if (firstname) {
+        if (count > 0) { sql += `, ` }
+        sql += `firstname='${firstname}'`
+        count += 1
+    }
+    if (lastname) {
+        if (count > 0) { sql += `, ` }
+        sql += `lastname='${lastname}'`
+        count += 1
+    }
+    if (experience) {
+        if (count > 0) { sql += `, ` }
+        sql += `experience=experience+'${experience}'`
+        count += 1
+    }
+    sql += `where username='${username}';`
+
+    console.log("********************d**********")
+    console.log(sql)
+    console.log("********************d**********")
 
     return exec(sql).then(updateData => {
         if (updateData.affectedRows === 1) {

@@ -5,7 +5,7 @@ const { SuccessModel, ErrorModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
 const { adminCheck, translatorCheck, translationReviewerCheck, copyReviewerCheck } = require('../middleware/roleCheck')
 
-router.post('/login', function(req, res, next) {
+router.post('/login', (req, res, next) => {
     const { username, password } = req.body
     const result = login(username, password)
     return result.then(data => {
@@ -34,8 +34,9 @@ router.post('/insertUser', (req, res, next) => {
     })
 })
 
+// router.post('/updateInfo', (req, res, next) => {
 router.post('/updateInfo', loginCheck, (req, res, next) => {
-    const result = updateUserInfo(req.query.username, req.query.body)
+    const result = updateUserInfo(req.body)
     return result.then(data => {
         res.json(
             new SuccessModel(data)
@@ -44,11 +45,8 @@ router.post('/updateInfo', loginCheck, (req, res, next) => {
 });
 
 router.post('/updateExp', adminCheck, (req, res, next) => {
-    const result = getUserInfo(req.query.username)
-    //what is the type of result??
-    //experience = old + new
-    //req.query.body.experience
-    const result = updateUserInfo(req.query.username, req.query.body)
+// router.post('/updateExp', (req, res, next) => {
+    const result = updateUserInfo(req.body)
     return result.then(data => {
         res.json(
             new SuccessModel(data)
