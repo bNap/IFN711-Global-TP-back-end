@@ -17,6 +17,7 @@ router.get('/list', (req, res, next) => {
     const publisher = req.query.publisher || ''
     const category = req.query.category || ''
     const trans_num = req.query.trans_num || ''
+    const status = req.query.status || ''
 
     // if (req.query.isadmin) {
     //     // 管理员界面
@@ -32,7 +33,7 @@ router.get('/list', (req, res, next) => {
     //     author = req.session.username
     // }
 
-    const result = getOriginalBooks(name, author, publisher, category, trans_num)
+    const result = getOriginalBooks(name, author, publisher, category, trans_num, status)
     return result.then(listData => {
         res.json(
             new SuccessModel(listData)

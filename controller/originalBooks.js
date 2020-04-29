@@ -1,7 +1,7 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getOriginalBooks = (name, author, publisher, category, trans_num) => {
+const getOriginalBooks = (name, author, publisher, category, trans_num, status) => {
     let sql = `select * from original_books where 1=1 `
     if (name) {
         sql += `and name like '%${name}%' `
@@ -17,6 +17,9 @@ const getOriginalBooks = (name, author, publisher, category, trans_num) => {
     }
     if (trans_num) {
         sql += `and trans_num >= ${trans_num} `
+    }
+    if (status) {
+        sql += `and status=${status} `
     }
     sql += `order by publish_time desc;`
 
