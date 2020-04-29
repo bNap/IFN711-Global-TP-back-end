@@ -49,6 +49,16 @@ router.get('/download', (req, res, next) => {
     })
 });
 
+router.post('/add', loginCheck, (req, res, next) => {
+    // router.post('/add', (req, res, next) => {
+        const result = insertBook(req.body)
+        return result.then(data => {
+            res.json(
+                new SuccessModel(data)
+            )
+        })
+    })
+
 // router.post('/update', (req, res, next) => {
 router.post('/update', adminCheck, (req, res, next) => {
     const result = updateBook(req.body)

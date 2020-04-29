@@ -16,12 +16,12 @@ router.post('/login', (req, res, next) => {
             req.session.id = data.id
 
             res.json(
-                new SuccessModel()
+                new SuccessModel(data, "login succeed")
             )
             return
         }
         res.json(
-            new ErrorModel('登录失败')
+            new ErrorModel('login fail')
         )
     })
 });
