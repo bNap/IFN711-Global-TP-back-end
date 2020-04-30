@@ -60,6 +60,7 @@ const updateBook = (bookData = {}) => {
     // const status = escape(bookData.status)
     // const status_info = escape(bookData.status_info)
     const id = (bookData.id)
+    const name = (bookData.name)
     const download_loc = (bookData.download_loc)
     const status = (bookData.status)
     const status_info = (bookData.status_info)
@@ -69,10 +70,16 @@ const updateBook = (bookData = {}) => {
     const cultrue_reviewer_id = (bookData.cultrue_reviewer_id)
     const copy_reviewer_id = (bookData.copy_reviewer_id)
     const admin_id = (bookData.admin_id)
+    const image = (bookData.image)
     let count = 0
     let sql = ` update translated_books set `
     if (count) {
         sql += `trans_num='${trans_num}'`
+        count += 1
+    }
+    if (name) {
+        if (count > 0) { sql += `, ` }
+        sql += `name='${name}'`
         count += 1
     }
     if (download_loc) {
@@ -118,6 +125,11 @@ const updateBook = (bookData = {}) => {
     if (admin_id) {
         if (count > 0) { sql += `, ` }
         sql += `admin_id='${admin_id}'`
+        count += 1
+    }
+    if (image) {
+        if (count > 0) { sql += `, ` }
+        sql += `image='${image}'`
         count += 1
     }
     sql += `where id=${id};`

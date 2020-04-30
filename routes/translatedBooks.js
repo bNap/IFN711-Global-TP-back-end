@@ -63,8 +63,8 @@ router.post('/add', loginCheck, (req, res, next) => {
     })
 })
 
-// router.post('/update', loginCheck, (req, res, next) => {
-router.post('/update', (req, res, next) => {
+router.post('/update', loginCheck, (req, res, next) => {
+// router.post('/update', (req, res, next) => {
     const result = updateBook(req.body)
     return result.then(val => {
         if (val) {
@@ -79,8 +79,8 @@ router.post('/update', (req, res, next) => {
     })
 })
 
-// router.post('/del', adminCheck, (req, res, next) => {
-router.post('/del', (req, res, next) => {
+router.post('/del', adminCheck, (req, res, next) => {
+// router.post('/del', (req, res, next) => {
     const result = delBook(req.body.id)
     return result.then(val => {
         if (val) {
