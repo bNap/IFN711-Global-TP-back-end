@@ -50,8 +50,8 @@ router.get('/download', (req, res, next) => {
     })
 });
 
-router.post('/add', loginCheck, (req, res, next) => {
-    // router.post('/add', (req, res, next) => {
+// router.post('/add', loginCheck, (req, res, next) => {
+    router.post('/add', (req, res, next) => {
         const result = insertBook(req.body)
         return result.then(data => {
             res.json(
@@ -60,8 +60,8 @@ router.post('/add', loginCheck, (req, res, next) => {
         })
     })
 
-// router.post('/update', (req, res, next) => {
-router.post('/update', adminCheck, (req, res, next) => {
+router.post('/update', (req, res, next) => {
+// router.post('/update', adminCheck, (req, res, next) => {
     const result = updateBook(req.body)
     return result.then(val => {
         if (val) {
@@ -76,7 +76,8 @@ router.post('/update', adminCheck, (req, res, next) => {
     })
 })
 
-router.post('/del', adminCheck, (req, res, next) => {
+router.post('/del', (req, res, next) => {
+// router.post('/del', adminCheck, (req, res, next) => {
     const result = delBook(req.body.id)
     return result.then(val => {
         if (val) {

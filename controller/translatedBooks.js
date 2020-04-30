@@ -36,10 +36,11 @@ const getDownload = (id) => {
     })
 }
 
-const insertBook = (translator_id, bookData = {}) => {
-    const original_id = escape(bookData.original_id)
-    const language = escape(bookData.language)
-    const startdate = escape(bookData.startdate)
+const insertBook = (bookData = {}) => {
+    const translator_id = (bookData.translator_id)
+    const original_id = (bookData.original_id)
+    const language = (bookData.language)
+    const startdate = (bookData.startdate)
 
     const sql = `
         insert into translated_books (original_id, startdate, language,  translator_id)

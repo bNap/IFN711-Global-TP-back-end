@@ -13,7 +13,11 @@ router.post('/login', (req, res, next) => {
             // 设置 session
             req.session.username = data.username
             req.session.rolename = data.rolename
-            req.session.id = data.id
+            req.session.userid = data.id
+
+            console.log(req.session.userid)
+            console.log(req.session.username)
+            console.log(req.session.rolename)
 
             res.json(
                 new SuccessModel(data, "login succeed")

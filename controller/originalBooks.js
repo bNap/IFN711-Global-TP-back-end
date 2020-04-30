@@ -37,18 +37,20 @@ const getDownload = (id) => {
 }
 
 const insertBook = (bookData = {}) => {
-    const name = escape(bookData.name)
-    const publisher = escape(bookData.publisher)
-    const author = escape(bookData.author)
-    const category = escape(bookData.category)
-    const language = escape(bookData.language)
-    const download_loc = escape(bookData.download_loc)
-    const publish_time = escape(bookData.publish_time)
+    const name = (bookData.name)
+    const publisher = (bookData.publisher)
+    const author = (bookData.author)
+    const category = (bookData.category)
+    const language = (bookData.language)
+    const download_loc = (bookData.download_loc)
+    const publish_time = (bookData.publish_time)
 
     const sql = `
         insert into original_books (name, publisher, author, category, language, download_loc, publish_time)
         values ('${name}', '${publisher}', '${author}', '${category}', '${language}', '${download_loc}', '${publish_time}');
     `
+
+    console.log(sql)
 
     return exec(sql).then(insertData => {
         return {
