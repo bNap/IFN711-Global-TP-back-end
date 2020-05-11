@@ -13,6 +13,7 @@ const RedisStore = require('connect-redis')(session)
 const userRouter = require('./routes/user')
 const originBookRouter = require('./routes/originalBooks')
 const transBookRouter = require('./routes/translatedBooks')
+const waitingBookRouter = require('./routes/trans_waiting_room')
 
 var app = express();
 
@@ -62,6 +63,7 @@ app.use(session({
 app.use('/api/user', userRouter);
 app.use('/api/origin', originBookRouter);
 app.use('/api/trans', transBookRouter);
+app.use('/api/wait', waitingBookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
