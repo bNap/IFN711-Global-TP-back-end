@@ -1,16 +1,13 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getOriginalBooks = (name, author, image, language, trans_num, status) => {
+const getOriginalBooks = (name, author, language, trans_num, status) => {
     let sql = `select * from original_books where 1=1 `
     if (name) {
         sql += `and name like '%${name}%' `
     }
     if (author) {
         sql += `and author like '%${author}%' `
-    }
-    if (image) {
-        sql += `and image='${image}%' `
     }
     if (language) {
         sql += `and language='${language}' `
@@ -44,8 +41,8 @@ const insertBook = (bookData = {}) => {
     const publish_time = (bookData.publish_time)
 
     const sql = `
-        insert into original_books (name, image, author, language, download_loc, publish_time)
-        values ('${name}', '${image}', '${author}', '${language}', '${download_loc}', '${publish_time}');
+        insert into original_books (name, image, author, language, download_loc)
+        values ('${name}', '${image}', '${author}', '${language}', '${download_loc}');
     `
 
     console.log(sql)

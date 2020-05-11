@@ -12,28 +12,13 @@ const loginCheck = require('../middleware/loginCheck')
 const { adminCheck, translatorCheck, translationReviewerCheck, copyReviewerCheck } = require('../middleware/roleCheck')
 
 router.get('/list', (req, res, next) => {
-    let author = req.query.author || ''
+    const author = req.query.author || ''
     const name = req.query.name || ''
-    const publisher = req.query.publisher || ''
-    const category = req.query.category || ''
+    const language = req.query.category || ''
     const trans_num = req.query.trans_num || ''
     const status = req.query.status || ''
 
-    // if (req.query.isadmin) {
-    //     // 管理员界面
-    //     if (req.session.username == null) {
-    //         console.error('is admin, but no login')
-    //         // 未登录
-    //         res.json(
-    //             new ErrorModel('未登录')
-    //         )
-    //         return
-    //     }
-    //     // 强制查询自己的博客
-    //     author = req.session.username
-    // }
-
-    const result = getOriginalBooks(name, author, publisher, category, trans_num, status)
+    const result = getOriginalBooks(name, author, language, trans_num, status)
     return result.then(listData => {
         res.json(
             new SuccessModel(listData)

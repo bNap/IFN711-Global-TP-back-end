@@ -12,11 +12,10 @@ const { adminCheck, translatorCheck, translationReviewerCheck, copyReviewerCheck
 router.get('/list', (req, res, next) => {
     const name = req.query.name || ''
     const original_id = req.query.original_id || ''
-    const image = req.query.image || ''
     const original_language = req.query.original_language || ''
     const target_language = req.query.target_language || ''
 
-    const result = getWaitingBooks(name, original_id, image, original_language, target_language)
+    const result = getWaitingBooks(name, original_id, original_language, target_language)
     return result.then(listData => {
         res.json(
             new SuccessModel(listData)

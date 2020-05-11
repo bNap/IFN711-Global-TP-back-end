@@ -1,16 +1,13 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getWaitingBooks = (name, original_id, image, original_language, target_language) => {
+const getWaitingBooks = (name, original_id, original_language, target_language) => {
     let sql = `select * from trans_waiting_room where 1=1 `
     if (name) {
         sql += `and name like '%${name}%' `
     }
     if (original_id) {
         sql += `and original_id='${original_id}%' `
-    }
-    if (image) {
-        sql += `and image='${image}%' `
     }
     if (original_language) {
         sql += `and original_language='${original_language}' `
