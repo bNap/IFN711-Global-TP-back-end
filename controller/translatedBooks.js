@@ -21,7 +21,7 @@ const getTranslatedBooks = (original_id, language, translator_id, translation_re
     if (status) {
         sql += `and status=${status} `
     }
-    sql += `order by enddate desc;`
+    sql += `order by startdate desc;`
 
     console.log(sql)
 
@@ -39,12 +39,14 @@ const getDownload = (id) => {
 const insertBook = (bookData = {}) => {
     const translator_id = (bookData.translator_id)
     const original_id = (bookData.original_id)
+    const name = (bookData.name)
     const language = (bookData.language)
     const startdate = (bookData.startdate)
+    const image = (bookData.image)
 
     const sql = `
-        insert into translated_books (original_id, startdate, language,  translator_id)
-        values ('${original_id}', '${startdate}', '${language}', '${translator_id}');
+        insert into translated_books (original_id, startdate, name, language, image, translator_id)
+        values ('${original_id}', '${startdate}', '${name}', '${language}', '${image}', '${translator_id}');
     `
     console.log(sql)
 
@@ -69,12 +71,12 @@ const updateBook = (bookData = {}) => {
     const enddate = (bookData.enddate)
     const translation_reviewer_id = (bookData.translation_reviewer_id)
     const cultrue_reviewer_id = (bookData.cultrue_reviewer_id)
-    const copy_reviewer_id = (bookData.copy_reviewer_id)
+    const language = (bookData.language)
     const admin_id = (bookData.admin_id)
     const image = (bookData.image)
     let count = 0
     let sql = ` update translated_books set `
-    if (count) {
+    if (trans_num) {
         sql += `trans_num='${trans_num}'`
         count += 1
     }
@@ -118,9 +120,9 @@ const updateBook = (bookData = {}) => {
         sql += `cultrue_reviewer_id='${cultrue_reviewer_id}'`
         count += 1
     }
-    if (copy_reviewer_id) {
+    if (language) {
         if (count > 0) { sql += `, ` }
-        sql += `copy_reviewer_id='${copy_reviewer_id}'`
+        sql += `language='${language}'`
         count += 1
     }
     if (admin_id) {

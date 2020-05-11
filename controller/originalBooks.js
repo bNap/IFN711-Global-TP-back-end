@@ -1,7 +1,7 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getOriginalBooks = (name, author, publisher, category, trans_num, status) => {
+const getOriginalBooks = (name, author, image, language, trans_num, status) => {
     let sql = `select * from original_books where 1=1 `
     if (name) {
         sql += `and name like '%${name}%' `
@@ -9,19 +9,18 @@ const getOriginalBooks = (name, author, publisher, category, trans_num, status) 
     if (author) {
         sql += `and author like '%${author}%' `
     }
-    if (publisher) {
-        sql += `and publisher like '%${publisher}%' `
+    if (image) {
+        sql += `and image='${image}%' `
     }
-    if (category) {
-        sql += `and category='${category}' `
+    if (language) {
+        sql += `and language='${language}' `
     }
     if (trans_num) {
         sql += `and trans_num >= ${trans_num} `
     }
     if (status) {
-        sql += `and status=${status} `
+        sql += `and status=${status};`
     }
-    sql += `order by publish_time desc;`
 
     console.log(sql)
 
@@ -38,16 +37,15 @@ const getDownload = (id) => {
 
 const insertBook = (bookData = {}) => {
     const name = (bookData.name)
-    const publisher = (bookData.publisher)
+    const image = (bookData.image)
     const author = (bookData.author)
-    const category = (bookData.category)
     const language = (bookData.language)
     const download_loc = (bookData.download_loc)
     const publish_time = (bookData.publish_time)
 
     const sql = `
-        insert into original_books (name, publisher, author, category, language, download_loc, publish_time)
-        values ('${name}', '${publisher}', '${author}', '${category}', '${language}', '${download_loc}', '${publish_time}');
+        insert into original_books (name, image, author, language, download_loc, publish_time)
+        values ('${name}', '${image}', '${author}', '${language}', '${download_loc}', '${publish_time}');
     `
 
     console.log(sql)

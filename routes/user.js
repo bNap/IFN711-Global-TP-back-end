@@ -12,7 +12,7 @@ router.post('/login', (req, res, next) => {
         if (data.username) {
             // 设置 session
             req.session.username = data.username
-            req.session.rolename = data.rolename
+            req.session.role = data.role
             req.session.userid = data.id
 
             console.log(req.session.userid)
@@ -30,7 +30,7 @@ router.post('/login', (req, res, next) => {
     })
 });
 
-router.post('/insertUser', (req, res, next) => {
+router.post('/insert', (req, res, next) => {
     const result = insertUser(req.body)
     return result.then(data => {
         res.json(
@@ -39,8 +39,8 @@ router.post('/insertUser', (req, res, next) => {
     })
 })
 
-// router.post('/updateInfo', (req, res, next) => {
-router.post('/updateInfo', loginCheck, (req, res, next) => {
+router.post('/update', (req, res, next) => {
+// router.post('/updateInfo', loginCheck, (req, res, next) => {
     const result = updateUserInfo(req.body)
     return result.then(data => {
         res.json(
@@ -49,14 +49,14 @@ router.post('/updateInfo', loginCheck, (req, res, next) => {
     })
 });
 
-router.post('/updateExp', adminCheck, (req, res, next) => {
+// router.post('/updateExp', adminCheck, (req, res, next) => {
 // router.post('/updateExp', (req, res, next) => {
-    const result = updateUserInfo(req.body)
-    return result.then(data => {
-        res.json(
-            new SuccessModel(data)
-        )
-    })
-});
+//     const result = updateUserInfo(req.body)
+//     return result.then(data => {
+//         res.json(
+//             new SuccessModel(data)
+//         )
+//     })
+// });
 
 module.exports = router;

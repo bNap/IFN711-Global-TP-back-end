@@ -43,10 +43,16 @@ router.get('/list', (req, res, next) => {
 
 router.get('/download', (req, res, next) => {
     const result = getDownload(req.query.id)
-    return result.then(data => {
-        res.json(
-            new SuccessModel(data)
-        )
+    return result.then(val => {
+        if (val) {
+            res.json(
+                new SuccessModel(val)
+            )
+        } else {
+            res.json(
+                new ErrorModel('not found')
+            )
+        }
     })
 });
 
