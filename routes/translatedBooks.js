@@ -3,6 +3,7 @@ var router = express.Router();
 const {
     getTranslatedBooks,
     getDownload,
+    getContent,
     insertBook,
     updateBook,
     delBook
@@ -51,6 +52,23 @@ router.get('/download', (req, res, next) => {
         )
     })
 });
+
+router.get('/content', (req, res, next) => {
+    // router.get('/download', loginCheck, (req, res, next) => {
+    const result = getContent(req.query.id)
+    return result.then(data => {
+        if (data) {
+            res.json(
+                new SuccessModel(data)
+            )
+        } else {
+            res.json(
+                new ErrorModel('not found')
+            )
+        }
+    })
+});
+
 
 // router.post('/add', loginCheck, (req, res, next) => {
 router.post('/add', (req, res, next) => {

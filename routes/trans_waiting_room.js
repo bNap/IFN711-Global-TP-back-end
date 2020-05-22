@@ -3,7 +3,8 @@ var router = express.Router();
 const {
     getWaitingBooks,
     insertBook,
-    delBook
+    delBook,
+    getCount
 } = require('../controller/trans_waiting_room')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
@@ -48,5 +49,14 @@ router.post('/del', (req, res, next) => {
         }
     })
 })
+
+router.get('/count', (req, res, next) => {
+    const result = getCount()
+    return result.then(listData => {
+        res.json(
+            new SuccessModel(listData)
+        )
+    })
+});
 
 module.exports = router;

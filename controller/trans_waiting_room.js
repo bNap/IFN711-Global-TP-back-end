@@ -53,8 +53,15 @@ const delBook = (id) => {
     })
 }
 
+const getCount = () => {
+    const sql = `select count(*) from trans_waiting_room;`
+    return exec(sql)
+}
+
+
 module.exports = {
     getWaitingBooks,
     insertBook,
-    delBook
+    delBook,
+    getCount
 }

@@ -1,7 +1,7 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getOriginalBooks = (name, author, language, trans_num, status) => {
+const getOriginalBooks = (name, author, language, trans_num, status, level, content_pill, type, keywords) => {
     let sql = `select * from original_books where 1=1 `
     if (name) {
         sql += `and name like '%${name}%' `
@@ -18,6 +18,18 @@ const getOriginalBooks = (name, author, language, trans_num, status) => {
     if (status) {
         sql += `and status=${status};`
     }
+    if (level) {
+        sql += `and level=${level};`
+    }
+    if (content_pill) {
+        sql += `and content_pill=${content_pill};`
+    }
+    if (type) {
+        sql += `and type=${type};`
+    }
+    if (keywords) {
+        sql += `and keywords like '%${keywords}%';`
+    }
 
     console.log(sql)
 
@@ -25,11 +37,16 @@ const getOriginalBooks = (name, author, language, trans_num, status) => {
     return exec(sql)
 }
 
-const getDownload = (id) => {
-    const sql = `select download_loc from original_books where id='${id}'`
+const getInfo = (id) => {
+    const sql = `select * from original_books where id='${id}'`
     return exec(sql).then(rows => {
         return rows[0]
     })
+}
+
+const getCount = (id) => {
+    const sql = `select count(1) from original_books`
+    return exec(sql)
 }
 
 const insertBook = (bookData = {}) => {
@@ -122,7 +139,8 @@ const delBook = (id) => {
 
 module.exports = {
     getOriginalBooks,
-    getDownload,
+    getInfo,
+    getCount,
     insertBook,
     updateBook,
     delBook

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { login, insertUser, getUserInfo, updateUserInfo, updateUserExp } = require('../controller/user')
+const { login, insertUser, getCount, getUserInfo, updateUserInfo, updateUserExp } = require('../controller/user')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const loginCheck = require('../middleware/loginCheck')
 const { adminCheck, translatorCheck, translationReviewerCheck, copyReviewerCheck } = require('../middleware/roleCheck')
@@ -42,6 +42,25 @@ router.post('/insert', (req, res, next) => {
 router.post('/update', (req, res, next) => {
 // router.post('/updateInfo', loginCheck, (req, res, next) => {
     const result = updateUserInfo(req.body)
+    return result.then(data => {
+        res.json(
+            new SuccessModel(data)
+        )
+    })
+});
+
+
+router.get('/count', (req, res, next) => {
+    const result = getCount()
+    return result.then(data => {
+        res.json(
+            new SuccessModel(data)
+        )
+    })
+});
+
+router.get('/topN', (req, res, next) => {
+    const result = getUserInfo()
     return result.then(data => {
         res.json(
             new SuccessModel(data)

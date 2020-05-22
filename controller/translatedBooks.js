@@ -36,6 +36,13 @@ const getDownload = (id) => {
     })
 }
 
+const getContent = (id) => {
+    const sql = `select id, trans_content, review_content from translated_books where id='${id}';`
+    return exec(sql).then(rows => {
+        return rows[0]
+    })
+}
+
 const insertBook = (bookData = {}) => {
     const translator_id = (bookData.translator_id)
     const original_id = (bookData.original_id)
@@ -74,12 +81,10 @@ const updateBook = (bookData = {}) => {
     const language = (bookData.language)
     const admin_id = (bookData.admin_id)
     const image = (bookData.image)
+    const trans_content = (bookData.trans_content)
+    const review_content = (bookData.review_content)
     let count = 0
     let sql = ` update translated_books set `
-    if (trans_num) {
-        sql += `trans_num='${trans_num}'`
-        count += 1
-    }
     if (name) {
         if (count > 0) { sql += `, ` }
         sql += `name='${name}'`
@@ -135,6 +140,16 @@ const updateBook = (bookData = {}) => {
         sql += `image='${image}'`
         count += 1
     }
+    if (trans_content) {
+        if (count > 0) { sql += `, ` }
+        sql += `trans_content='${trans_content}'`
+        count += 1
+    }
+    if (review_content) {
+        if (count > 0) { sql += `, ` }
+        sql += `review_content='${review_content}'`
+        count += 1
+    }
     sql += `where id=${id};`
 
     console.log(sql)
@@ -160,6 +175,7 @@ const delBook = (id) => {
 module.exports = {
     getTranslatedBooks,
     getDownload,
+    getContent,
     insertBook,
     updateBook,
     delBook

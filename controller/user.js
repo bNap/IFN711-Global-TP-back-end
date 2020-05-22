@@ -52,16 +52,22 @@ const insertUser = (userData = {}) => {
     })
 }
 
-const getUserInfo = (username) => {
-    username = escape(username)
+const getUserInfo = () => {
 
     const sql = `
-        select * from users where username=${username};
+        select * from users order by experience desc;
     `
     // console.log('sql is', sql)
     return exec(sql).then(rows => {
-        return rows[0] || {}
+        return rows || {}
     })
+}
+
+const getCount = () => {
+    const sql = `
+        select count(1) from users;
+    `
+    return exec(sql)
 }
 
 // const updateUserInfo = (username, userData = {}) => {
@@ -83,6 +89,8 @@ const updateUserInfo = (userData = {}) => {
     const phone = (userData.phone)
     const firstname = (userData.firstname)
     const lastname = (userData.lastname)
+    const image = (userData.image)
+    const introduction = (userData.introduction)
 
     const title = (userData.nickname)
     const password = (userData.password)
@@ -152,6 +160,16 @@ const updateUserInfo = (userData = {}) => {
         sql += `lastname='${lastname}'`
         count += 1
     }
+    if (image) {
+        if (count > 0) { sql += `, ` }
+        sql += `image='${image}'`
+        count += 1
+    }
+    if (introduction) {
+        if (count > 0) { sql += `, ` }
+        sql += `introduction='${introduction}'`
+        count += 1
+    }
     sql += `where username='${username}';`
 
     console.log("********************d**********")
@@ -169,6 +187,7 @@ const updateUserInfo = (userData = {}) => {
 module.exports = {
     login,
     insertUser,
+    getCount,
     getUserInfo,
     updateUserInfo
 }

@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const {
     getOriginalBooks,
-    getDownload,
+    getInfo,
+    getCount,
     insertBook,
     updateBook,
     delBook
@@ -17,8 +18,12 @@ router.get('/list', (req, res, next) => {
     const language = req.query.category || ''
     const trans_num = req.query.trans_num || ''
     const status = req.query.status || ''
+    const level = req.query.level || ''
+    const content_pill = req.query.content_pill || ''
+    const type = req.query.type || ''
+    const keywords = req.query.keywords || ''
 
-    const result = getOriginalBooks(name, author, language, trans_num, status)
+    const result = getOriginalBooks(name, author, language, trans_num, status, level, content_pill, type, keywords)
     return result.then(listData => {
         res.json(
             new SuccessModel(listData)
@@ -26,18 +31,25 @@ router.get('/list', (req, res, next) => {
     })
 });
 
-router.get('/download', (req, res, next) => {
-    const result = getDownload(req.query.id)
-    return result.then(val => {
-        if (val) {
+router.get('/info', (req, res, next) => {
+    const result = getInfo(req.query.id)
+    return result.then(listData => {
+        if(listData) {            
             res.json(
-                new SuccessModel(val)
+                new SuccessModel(listData)
             )
-        } else {
-            res.json(
-                new ErrorModel('not found')
-            )
+        } else {res.json(
+            new ErrorModel('not found'))
         }
+    })
+});
+
+router.get('/count', (req, res, next) => {
+    const result = getCount()
+    return result.then(listData => {            
+        res.json(
+            new SuccessModel(listData)
+        )
     })
 });
 
