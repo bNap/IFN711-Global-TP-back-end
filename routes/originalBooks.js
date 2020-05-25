@@ -22,8 +22,9 @@ router.get('/list', (req, res, next) => {
     const content_pill = req.query.content_pill || ''
     const type = req.query.type || ''
     const keywords = req.query.keywords || ''
+    const target_language = req.query.target_language || ''
 
-    const result = getOriginalBooks(name, author, language, trans_num, status, level, content_pill, type, keywords)
+    const result = getOriginalBooks(name, author, language, trans_num, status, level, content_pill, type, keywords, target_language)
     return result.then(listData => {
         res.json(
             new SuccessModel(listData)

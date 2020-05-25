@@ -63,7 +63,7 @@ app.use(session({
 app.use('/api/user', userRouter);
 app.use('/api/origin', originBookRouter);
 app.use('/api/trans', transBookRouter);
-app.use('/api/wait', waitingBookRouter);
+// app.use('/api/wait', waitingBookRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

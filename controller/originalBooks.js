@@ -1,7 +1,7 @@
 const xss = require('xss')
 const { exec } = require('../db/mysql')
 
-const getOriginalBooks = (name, author, language, trans_num, status, level, content_pill, type, keywords) => {
+const getOriginalBooks = (name, author, language, trans_num, status, level, content_pill, type, keywords, target_language) => {
     let sql = `select * from original_books where 1=1 `
     if (name) {
         sql += `and name like '%${name}%' `
@@ -29,6 +29,9 @@ const getOriginalBooks = (name, author, language, trans_num, status, level, cont
     }
     if (keywords) {
         sql += `and keywords like '%${keywords}%';`
+    }
+    if (target_language) {
+        sql += `and target_language like '%${target_language}%';`
     }
 
     console.log(sql)
