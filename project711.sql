@@ -40,7 +40,7 @@ CREATE TABLE `original_books` (
   `page_count` int NOT NULL,
   `reward_points` int DEFAULT NULL,
   `keywords` varchar(100) DEFAULT NULL,
-  `traget_language` varchar(250) DEFAULT NULL,
+  `target_language` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `download_loc_UNIQUE` (`download_loc`),
   UNIQUE KEY `name_UNIQUE` (`name`),
@@ -91,6 +91,9 @@ CREATE TABLE `translated_books` (
   `trans_content` varchar(1000) DEFAULT NULL,
   `review_content` varchar(1000) DEFAULT NULL,
   `target_language` varchar(200) NOT NULL,
+  `translator_name` varchar(150) DEFAULT NULL,
+  `translation_reviewer_name` varchar(150) DEFAULT NULL,
+  `cultrue_reviewer_name` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -137,4 +140,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 12:21:56
+-- Dump completed on 2020-05-27 21:07:19

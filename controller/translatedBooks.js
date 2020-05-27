@@ -83,6 +83,9 @@ const updateBook = (bookData = {}) => {
     const image = (bookData.image)
     const trans_content = (bookData.trans_content)
     const review_content = (bookData.review_content)
+    const translator_name = (bookData.translator_name)
+    const translation_reviewer_name = (bookData.translation_reviewer_name)
+    const cultrue_reviewer_name = (bookData.cultrue_reviewer_name)
     let count = 0
     let sql = ` update translated_books set `
     if (name) {
@@ -148,6 +151,21 @@ const updateBook = (bookData = {}) => {
     if (review_content) {
         if (count > 0) { sql += `, ` }
         sql += `review_content='${review_content}'`
+        count += 1
+    }
+    if (translator_name) {
+        if (count > 0) { sql += `, ` }
+        sql += `translator_name='${translator_name}'`
+        count += 1
+    }
+    if (translation_reviewer_name) {
+        if (count > 0) { sql += `, ` }
+        sql += `translation_reviewer_name='${translation_reviewer_name}'`
+        count += 1
+    }
+    if (cultrue_reviewer_name) {
+        if (count > 0) { sql += `, ` }
+        sql += `cultrue_reviewer_name='${cultrue_reviewer_name}'`
         count += 1
     }
     sql += `where id=${id};`
