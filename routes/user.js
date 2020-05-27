@@ -43,9 +43,15 @@ router.post('/update', (req, res, next) => {
 // router.post('/updateInfo', loginCheck, (req, res, next) => {
     const result = updateUserInfo(req.body)
     return result.then(data => {
-        res.json(
-            new SuccessModel(data)
-        )
+        if (data) {
+            res.json(
+                new SuccessModel(data)
+            )
+        } else {
+            res.json(
+                new ErrorModel('update fail')
+            )
+        }
     })
 });
 

@@ -92,7 +92,7 @@ const updateUserInfo = (userData = {}) => {
     const image = (userData.image)
     const introduction = (userData.introduction)
 
-    const title = (userData.nickname)
+    const title = (userData.title)
     const password = (userData.password)
     const experience = (userData.experience)
     const translation_num = (userData.translation_num)
@@ -102,7 +102,7 @@ const updateUserInfo = (userData = {}) => {
     let count = 0
     let sql = ` update users set `;
     if (title) {
-        sql += `nickname='${title}'`
+        sql += `title='${title}'`
         count += 1
     }
     if (password) {
