@@ -6,5 +6,5 @@ mysqldump -d -u root -p project711 > project711.sql
 ## import
 mysql -u root -p project711 < project711.sql
 
-## Run
+## run
 npm run dev
